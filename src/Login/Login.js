@@ -34,7 +34,7 @@ const Login = () => {
                         <label className="label">
                             <span className="label-text">E-mail</span>
                         </label>
-                        <input type="email" {...register("email", { required: 'Email Address is required' })} className="input input-bordered w-full max-w-xs" />
+                        <input type="email" {...register("email", { required: 'Email Address is required' })} className="dark:bg-gray-600 dark:text-white input input-bordered w-full max-w-xs" />
                         {errors.email && <p className='text-red-600'>{errors.email?.message}</p>}
                     </div>
 
@@ -47,7 +47,7 @@ const Login = () => {
                                 // pattern:{value: /(?=.*[a-z])(?=.*[A-Z])(?=.*[$@])/, message: 'Passwor should be strong'}
                             })
                         }
-                            className="input input-bordered w-full max-w-xs" />
+                            className="input input-bordered w-full max-w-xs dark:bg-gray-600 dark:text-white" />
                         {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
                     </div>
                     <Button type="submit" className='btn btn-accent w-full mt-5 hover:bg-emerald-500 p-2'>

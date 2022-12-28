@@ -2,7 +2,7 @@ import { Button, Label, Spinner, Textarea } from 'flowbite-react';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 
 const AddTask = () => {
@@ -91,76 +91,83 @@ const AddTask = () => {
     };
 
     return (
-        <div className='lg:w-8/12 lg:mx-auto lg:flex lg:mt-16 mx-8 mt-8'>
+        <div>
+            {
+                user ?
+                    ''
+                    :
+                    <h1 className='text-center text-3xl'>Please <Link to='/login' className='font-bold underline text-sky-500'>Login</Link> For Add Your Daily Task</h1>
+            }
+            <div className='lg:w-8/12 lg:mx-auto lg:flex lg:mt-16 mx-8 mt-8'>
 
 
+                <div className='lg:flex'>
 
-            <div className='lg:flex'>
-
-                <div id="textarea" className='mb-16 lg:mb-0'>
-                    <div className="mb-2 block">
-                        <Label
-                            className="text-2xl"
-                            htmlFor="daily"
-                            value="Add Your Daily Tasks And Press Enter"
-                        />
-                    </div>
-                    {
-                        user ?
-                            <Textarea
-                                id="daily"
-                                placeholder="enter your daily task"
-                                required={true}
-                                rows={8}
-                                onKeyDown={handleKeyDown}
-                                onChange={handleChange}
+                    <div id="textarea" className='mb-16 lg:mb-0'>
+                        <div className="mb-2 block">
+                            <Label
+                                className="text-2xl"
+                                htmlFor="daily"
+                                value="Add Your Daily Tasks And Press Enter"
                             />
-                            :
-                            <Textarea
-                                id="daily"
-                                placeholder="Please Log In"
-                                required={true}
-                                rows={8}
-                                onKeyDown={handleKeyDown}
-                                onChange={handleChange}
-                                disabled
-                            />
-                    }
-                </div>
-
-                <div className='lg:ml-24'>
-                    <h1 className='text-2xl font-bold'>Add Your Task With Picture</h1>
-                    <form onSubmit={handleSubmit(onSubmit)}>
-
-                        <div className='mb-3 dark:text-white'>
-                            <label className="label">
-                                <span className="label-text text-bold text-2xl">About Task</span>
-                            </label>
-                            <textarea {...register("about", { required: true })} className="textarea textarea-primary w-full h-52 dark:bg-gray-600 dark:text-white" placeholder="About Tasks"></textarea>
                         </div>
-
-                        <div>
-                            <label className="label">
-                                <span className="label-text text-bold text-2xl">Upload Image</span>
-                            </label>
-                            <input {...register("image", { required: true })} type="file" className="file-input file-input-bordered file-input-success w-full" />
-                        </div>
-
                         {
                             user ?
-                                <Button type="submit" className='btn btn-accent w-full mt-5 hover:bg-emerald-500 p-2'>
-                                    Submit
-                                </Button>
+                                <Textarea
+                                    id="daily"
+                                    placeholder="enter your daily task"
+                                    required={true}
+                                    rows={8}
+                                    onKeyDown={handleKeyDown}
+                                    onChange={handleChange}
+                                />
                                 :
-                                <Button type="submit" className='btn btn-accent w-full mt-5 hover:bg-emerald-500 p-2' disabled>
-                                    Please Login For Anable Button
-                                </Button>
+                                <Textarea
+                                    id="daily"
+                                    placeholder="Please Log In"
+                                    required={true}
+                                    rows={8}
+                                    onKeyDown={handleKeyDown}
+                                    onChange={handleChange}
+                                    disabled
+                                />
                         }
-                    </form>
+                    </div>
+
+                    <div className='lg:ml-24'>
+                        <h1 className='text-2xl font-bold'>Add Your Task With Picture</h1>
+                        <form onSubmit={handleSubmit(onSubmit)}>
+
+                            <div className='mb-3 dark:text-white'>
+                                <label className="label">
+                                    <span className="label-text text-bold text-2xl">About Task</span>
+                                </label>
+                                <textarea {...register("about", { required: true })} className="textarea textarea-primary w-full h-52 dark:bg-gray-600 dark:text-white" placeholder="About Tasks"></textarea>
+                            </div>
+
+                            <div>
+                                <label className="label">
+                                    <span className="label-text text-bold text-2xl">Upload Image</span>
+                                </label>
+                                <input {...register("image", { required: true })} type="file" className="file-input file-input-bordered file-input-success w-full" />
+                            </div>
+
+                            {
+                                user ?
+                                    <Button type="submit" className='btn btn-accent w-full mt-5 hover:bg-emerald-500 p-2'>
+                                        Submit
+                                    </Button>
+                                    :
+                                    <Button type="submit" className='btn btn-accent w-full mt-5 hover:bg-emerald-500 p-2' disabled>
+                                        Please Login For Anable Button
+                                    </Button>
+                            }
+                        </form>
+                    </div>
+
                 </div>
 
             </div>
-
         </div>
     );
 };
