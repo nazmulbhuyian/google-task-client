@@ -41,7 +41,7 @@ const AddTask = () => {
                         about: data.about,
                         email: user?.email
                     }
-                    fetch('http://localhost:5000/addTasks', {
+                    fetch('https://google-task-server.vercel.app/addTasks', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json'
@@ -72,7 +72,7 @@ const AddTask = () => {
                 email: user?.email,
                 about: message
             }
-            fetch('http://localhost:5000/addTasks', {
+            fetch('https://google-task-server.vercel.app/addTasks', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -128,8 +128,8 @@ const AddTask = () => {
                     }
                 </div>
 
-                    <div className='lg:ml-24'>
-                        <h1 className='text-2xl font-bold'>Add Your Task With Picture</h1>
+                <div className='lg:ml-24'>
+                    <h1 className='text-2xl font-bold'>Add Your Task With Picture</h1>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
                         <div className='mb-3 dark:text-white'>

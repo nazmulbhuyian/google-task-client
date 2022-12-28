@@ -8,7 +8,7 @@ const SingleComplete = ({ item, refetch }) => {
     const navigate = useNavigate()
 
     const handleDelete = (id) => {
-        fetch(`http://localhost:5000/deleteTasks/${id}`, {
+        fetch(`https://google-task-server.vercel.app/deleteTasks/${id}`, {
             method: 'DELETE',
             headers: {
 
@@ -30,7 +30,7 @@ const SingleComplete = ({ item, refetch }) => {
             email: item.email,
             about: item.about
         }
-        fetch('http://localhost:5000/addTasks', {
+        fetch('https://google-task-server.vercel.app/addTasks', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -41,7 +41,7 @@ const SingleComplete = ({ item, refetch }) => {
             .then(data => {
                 console.log(data);
                 if (data.acknowledged === true) {
-                    fetch(`http://localhost:5000/deleteTasks/${item._id}`, {
+                    fetch(`https://google-task-server.vercel.app/deleteTasks/${item._id}`, {
                         method: 'DELETE',
                         headers: {
 

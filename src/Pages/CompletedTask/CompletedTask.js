@@ -20,7 +20,7 @@ const CompletedTask = () => {
     const { refetch, error, data: items = [] } = useQuery({
         queryKey: ['/completeTask', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/completeTask?email=${user?.email}`)
+            const res = await fetch(`https://google-task-server.vercel.app/completeTask?email=${user?.email}`)
             const data = await res.json();
             return data;
         }
