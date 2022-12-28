@@ -4,7 +4,7 @@ import Navbar from '../Navbar/Navbar';
 
 const Main = () => {
     return (
-        <div className='dark:bg-gray-900 dark:text-white'>
+        <div>
             <Navbar></Navbar>
             <Outlet></Outlet>
         </div>
