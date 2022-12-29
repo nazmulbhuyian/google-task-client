@@ -28,10 +28,12 @@ const MyTask = () => {
 
 
     return (
-        <div className='lg:w-2/5 lg:mx-auto border-2 mt-8 lg:mt-16'>
-            {
-                items?.map((item, i) => <SingleTask item={item} refetch={refetch}></SingleTask>)
-            }
+        <div className='dark:bg-gray-900 dark:text-white'>
+            <div className='lg:w-2/5 lg:mx-auto border-2 mt-8 lg:mt-16'>
+                {
+                    items?.map((item, i) => <SingleTask item={item} refetch={refetch}></SingleTask>)
+                }
+            </div>
         </div>
     );
 };

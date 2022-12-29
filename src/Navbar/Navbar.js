@@ -17,7 +17,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className='lg:w-3/5 lg:mx-auto'>
+        <div className='lg:w-3/5 lg:mx-auto dark:bg-gray-900 dark:text-white'>
             <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
                 <div className="container flex flex-wrap items-center justify-between mx-auto">
                     <div className="flex items-center">

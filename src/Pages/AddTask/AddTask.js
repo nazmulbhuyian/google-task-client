@@ -91,7 +91,7 @@ const AddTask = () => {
     };
 
     return (
-        <div>
+        <div className='dark:bg-gray-900 dark:text-white'>
             {
                 user ?
                     ''

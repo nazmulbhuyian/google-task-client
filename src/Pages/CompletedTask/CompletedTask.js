@@ -27,10 +27,12 @@ const CompletedTask = () => {
     })
 
     return (
-        <div className='lg:w-2/5 lg:mx-auto border-2 mt-8 lg:mt-16'>
-            {
-                items?.map((item) => <SingleComplete item={item} refetch={refetch}></SingleComplete>)
-            }
+        <div className='dark:bg-gray-900 dark:text-white'>
+            <div className='lg:w-2/5 lg:mx-auto border-2 mt-8 lg:mt-16'>
+                {
+                    items?.map((item) => <SingleComplete item={item} refetch={refetch}></SingleComplete>)
+                }
+            </div>
         </div>
     );
 };
