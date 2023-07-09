@@ -1,9 +1,10 @@
 import { Button } from 'flowbite-react';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider/AuthProvider';
 import Google from './Google';
+import { toast } from 'react-hot-toast';
 
 const Login = () => {
     const { signIn } = useContext(AuthContext);
@@ -14,15 +15,40 @@ const Login = () => {
     const location = useLocation()
     // const from = location.state?.from?.pathname || '/';
 
+    // const handleSignIn = (data) => {
+    //     signIn(data.email, data.password)
+    //         .then(result => {
+    //             const user = result.user;
+    //             // navigate(from, {replace: true})
+    //             navigate('/')
+    //         })
+    //         .then(err => console.error(err));
+    // }
+
+
+
+
     const handleSignIn = (data) => {
-        signIn(data.email, data.password)
-            .then(result => {
-                const user = result.user;
-                // navigate(from, {replace: true})
-                navigate('/')
+        const userData = {
+            email:data.email,
+            password:data.password
+        }
+        fetch(`http://localhost:5000/login`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                localStorage.setItem('accessToken', data.accessToken);
             })
-            .then(err => console.error(err));
     }
+
+
+
     return (
         <div className='flex justify-center items-center dark:bg-gray-900 dark:text-white'>
             <div className='w-96 p-7'>

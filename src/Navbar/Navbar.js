@@ -10,10 +10,25 @@ const Navbar = () => {
 
     const { user, logOut } = useContext(AuthContext)
 
+    // const handleLogOut = () => {
+    //     logOut()
+    //         .then(() => { })
+    //         .catch(err => console.error(err))
+    // }
     const handleLogOut = () => {
-        logOut()
-            .then(() => { })
-            .catch(err => console.error(err))
+        localStorage.removeItem('accessToken');
+        // fetch(`http://localhost:5000/logOut`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json',
+        //         authorization: `bearer ${localStorage.getItem('accessToken')}`
+        //     }
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         localStorage.removeItem('accessToken');
+        //     })
     }
 
     return (

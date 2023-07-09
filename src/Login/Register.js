@@ -1,8 +1,9 @@
 import { Button } from 'flowbite-react';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider/AuthProvider';
+import { toast } from 'react-hot-toast';
 
 const Register = () => {
     const { createUser } = useContext(AuthContext)
@@ -11,13 +12,35 @@ const Register = () => {
 
     const navigate = useNavigate();
 
+    // const handleSignUp = data => {
+    //     createUser(data.email, data.password)
+    //         .then(result => {
+    //             const user = result.user;
+    //             navigate('/')
+    //         })
+    //         .then(error => console.error(error))
+    // }
+
     const handleSignUp = data => {
-        createUser(data.email, data.password)
-            .then(result => {
-                const user = result.user;
-                navigate('/')
+        const userData = {
+            name:data.name,
+            email:data.email,
+            password:data.password
+        }
+        fetch(`http://localhost:5000/users`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(userData)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+                if (data) {
+                    toast.success('User Add Successfully')
+                }
             })
-            .then(error => console.error(error))
     }
     return (
         <div className='flex justify-center items-center dark:bg-gray-900 dark:text-white'>

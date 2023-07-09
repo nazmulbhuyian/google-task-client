@@ -1,5 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
-import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile} from 'firebase/auth'
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
 import app from '../../firebase/firebase.config';
 
 
@@ -9,7 +9,7 @@ const auth = getAuth(app)
 
 const googleProvider = new GoogleAuthProvider()
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true)
 
@@ -22,6 +22,7 @@ const AuthProvider = ({children}) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
     }
+
     const logOut = () => {
         setLoading(true)
         return signOut(auth);
@@ -37,14 +38,33 @@ const AuthProvider = ({children}) => {
     }
 
 
+    // useEffect(() => {
+    //     const unSubscribe = onAuthStateChanged(auth, currentUser => {
+    //         console.log(currentUser);
+    //         setUser(currentUser)
+    //         setLoading(false);
+    //     })
+    //     return () => unSubscribe;
+    // }, [])
+
     useEffect(() => {
-        const unSubscribe = onAuthStateChanged(auth, currentUser => {
-            console.log(currentUser);
-            setUser(currentUser)
-            setLoading(false);
+        const token = (localStorage.getItem('accessToken'));
+        fetch(`http://localhost:5000/getMe`, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                // authorization: `bearer ${localStorage.getItem('accessToken')}`
+                authorization: `bearer ${token}`
+            }
         })
-        return () => unSubscribe;
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                setUser(data)
+                setLoading(false);
+            })
     }, [])
+    console.log(user);
 
     const info = {
         createUser,
